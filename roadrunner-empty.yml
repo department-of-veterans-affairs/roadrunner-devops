@@ -1,0 +1,19 @@
+- name: roadrunner empty project
+  hosts: roadrunner_webservers
+
+  vars:
+    name: roadrunner
+    user: roadrunner
+    group: service
+    app_home: /opt/{{ name }}
+    app_src: "{{ app_home }}/src"
+    rails_port: 3000
+    git:
+      url: https://github.com/department-of-veterans-affairs/roadrunner-rails-starter-project.git
+      version: HEAD
+      accept_hostkey: true
+
+  roles:
+    - role: roadrunner
+      become: true
+      become_user: root

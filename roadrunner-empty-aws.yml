@@ -1,0 +1,58 @@
+---
+###
+# Step 1: Launch a new instance from a base image.
+###
+- name: launch AMI instance
+  hosts: localhost
+  connection: local
+
+  vars:
+
+    ###
+    # CUSTOM: deployment naming scheme
+    ##
+    app_name: roadrunner_ami
+    app_group: dsva
+    app_project: appeals
+
+  roles:
+
+    ###
+    # CUSTOM: the AWS environment
+    ##
+    - role: aws-launch
+
+      # AWS-specific variables
+      region: us-west-2
+      keypair: Caseflow
+
+      # this should be a subnet with access to public internet for applying system updates
+      subnet_id: subnet-febab2a7
+
+      # this should be a security group that allows inbound SSH from ansible control machine
+      security_groups:
+        - sg-d76377b0
+
+      # the Hosts group targeted by the application file
+      playbook_group: roadrunner_webservers
+
+###
+# Step 2: Deploy application to the new instance
+###
+- name: deploy application to new instance
+
+  ###
+  # CUSTOM: the application's playbook
+  ##
+  include: roadrunner-empty.yml
+
+###
+# Step 3: Create an AMI from the new instance and terminate the instance
+###
+- name: bake ami
+  hosts: localhost
+  connection: local
+
+  roles:
+    - role: aws-bake
+      ec2_instances: "{{ ec2.instances }}"
