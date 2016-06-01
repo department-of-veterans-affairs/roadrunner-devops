@@ -24,14 +24,14 @@
 
       # AWS-specific variables
       region: us-west-2
-      keypair: Caseflow
+      keypair: your-keypair-name
 
       # this should be a subnet with access to public internet for applying system updates
-      subnet_id: subnet-febab2a7
+      subnet_id: subnet-xxx
 
       # this should be a security group that allows inbound SSH from ansible control machine
       security_groups:
-        - sg-d76377b0
+        - sg-xxx
 
       # the Hosts group targeted by the application file
       playbook_group: roadrunner_webservers
