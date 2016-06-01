@@ -1,4 +1,0 @@
-{% if repo is defined %}
-commit: {{repo.after}}
-{% endif %}
-date: {{date.stdout}}
