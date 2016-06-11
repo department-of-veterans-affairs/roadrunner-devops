@@ -11,10 +11,10 @@ Starter project for automating deployment of a [roadrunner-rails](https://github
 * Configure CloudWatch logs agent
 * Configure mechanism to pass environment variables to application via EC2 tags so the same image can be deployed to multiple environments without modification.
 * Take a production-ready snapshot of the instance
-* `Coming Soon` Duplicate an existing launch configuration
-* `Coming Soon` Modify it to use the newly created AMI and save as new launch configuration
-* `Coming Soon` Modify existing auto-scaling group to use the above launch configuration.
-* `Coming Soon` Start terminating instances to automatically be replaced by the above auto-scaling group (optionally removing them from load-balancer first).
+* Duplicate an existing launch configuration
+* Modify it to use the newly created AMI and save as new launch configuration
+* Modify existing auto-scaling group to use the above launch configuration.
+* Start terminating instances to automatically be replaced by the above auto-scaling group (optionally removing them from load-balancer first).
 
 ## Quickstart: AWS
 Deploy a roadrunner application to Vagrant instance(s). Prerequisites:
