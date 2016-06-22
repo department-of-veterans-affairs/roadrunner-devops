@@ -11,10 +11,9 @@ Starter project for automating deployment of a [roadrunner-rails](https://github
 * Configure CloudWatch logs agent
 * Configure mechanism to pass environment variables to application via EC2 tags so the same image can be deployed to multiple environments without modification.
 * Take a production-ready snapshot of the instance
-* Duplicate an existing launch configuration
-* Modify it to use the newly created AMI and save as new launch configuration
-* Modify existing auto-scaling group to use the above launch configuration.
-* Start terminating instances to automatically be replaced by the above auto-scaling group (optionally removing them from load-balancer first).
+* Create a new launch configuration with the newly created AMI
+* Modify existing auto-scaling group to use the newly created launch configuration.
+* Replace old instances in the auto-scaling group with new instances on a rolling basis (with configurable batch size).
 
 ## Quickstart: AWS
 Deploy a roadrunner application to Vagrant instance(s). Prerequisites:
@@ -48,12 +47,14 @@ $ curl localhost:3000
 ```
 
 ## Quickstart: AWS
-Create an AMI imae of a roadrunner application. Prerequisites:
+Create an AMI image of a roadrunner application. Prerequisites:
 * Ansible to drive the process;
 * An AWS environment with
   - Subnet
   - Security group
   - Keypair
+  - ELB
+  - Auto-scaling group
 
 
 1. Edit the `roadrunnner-empty-aws.yml` file and modify the AWS-related variables.
@@ -88,10 +89,9 @@ This project deploys a sample Rails application but the conventions can be used 
 
 ##### Step 2: Deploy instance to cloud environment
 - "Bake" AMI of newly packaged instance (from above)
-- Previously provisioned `autoscaling group` is running and behind ELB
-- The new `autoscaling group` and `launch configuration` are provisioned side-by-side, behind the same ELB.
-- Wait for new instances to become available
-- Terminate previous `autoscaling group` and associated instances.
+- Previously provisioned `auto-scaling group` is running and behind ELB
+- The new `launch configuration` is applied to the existing auto-scaling group.
+- Instances are replaced in batches.
 
 ## Resources
 * [Ansible Directory Structure](http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout)
