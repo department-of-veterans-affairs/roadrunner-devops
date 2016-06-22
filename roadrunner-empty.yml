@@ -10,8 +10,6 @@
     rails_port: 3000
     git:
       url: https://github.com/department-of-veterans-affairs/roadrunner-rails-starter-project.git
-      version: HEAD
-      accept_hostkey: true
 
   roles:
     - role: roadrunner
