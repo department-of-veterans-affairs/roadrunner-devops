@@ -15,11 +15,12 @@ Starter project for automating deployment of a [roadrunner-rails](https://github
 * Modify existing auto-scaling group to use the newly created launch configuration.
 * Replace old instances in the auto-scaling group with new instances on a rolling basis (with configurable batch size).
 
-## Quickstart: AWS
+## Quickstart: Vagrant
 Deploy a roadrunner application to Vagrant instance(s). Prerequisites:
 
 * Vagrant
 * Virtualbox
+
 
 1. Start vargrant
 1. SSH to "jumpbox" driving the ansible process
@@ -48,13 +49,14 @@ $ curl localhost:3000
 
 ## Quickstart: AWS
 Create an AMI image of a roadrunner application. Prerequisites:
+
 * Ansible to drive the process;
 * An AWS environment with
-  - Subnet
-  - Security group
-  - Keypair
-  - ELB
-  - Auto-scaling group
+   - Subnet
+   - Security group
+   - Keypair
+   - ELB
+   - Auto-scaling group
 
 
 1. Edit the `roadrunnner-empty-aws.yml` file and modify the AWS-related variables.
