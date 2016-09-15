@@ -25,7 +25,7 @@ Deploy a roadrunner application to Vagrant instance(s). Prerequisites:
 
 1. Start vargrant
 1. SSH to "jumpbox" driving the ansible process
-1. Run ansible from local files (via default Vagrant [`synced_folder`](synced_folder ))
+1. Run ansible from local files (via default Vagrant `synced_folder`)
 ```shell
 > vagrant up
 > vagrant ssh ansible_host
