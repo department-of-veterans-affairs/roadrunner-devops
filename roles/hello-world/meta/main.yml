@@ -1,0 +1,27 @@
+dependencies:
+  - role: roadrunner
+    become: true
+    become_user: root
+
+    # application name
+    name: roadrunner
+
+    # OS user/group
+    user: roadrunner
+    group: service
+
+    # home directory
+    app_home: /opt/{{ name }}
+
+    # rails options
+    rails_port: 3000
+    rails_env: production
+
+    # build from source
+    app_src: "{{ app_home }}/src"
+    git:
+      url: https://github.com/department-of-veterans-affairs/roadrunner-rails-starter-project.git
+
+    # process env
+    app_environment:
+      SOME_ENV_VAR: "hello world"

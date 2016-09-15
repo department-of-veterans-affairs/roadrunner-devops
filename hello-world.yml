@@ -1,0 +1,7 @@
+- name: driver playbook
+  hosts: all
+
+  roles:
+    - role: hello-world
+      become: true
+      become_user: root

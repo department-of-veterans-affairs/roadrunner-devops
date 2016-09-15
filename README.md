@@ -6,10 +6,11 @@ Starter project for automating deployment of a [roadrunner-rails](https://github
 
 ## What You Get: Overview
 * Launch a new instance
+* Optionally bootstrap the new instance with an ssh user other than the one baked into its source AMI (e.g., something other than *ec2-user* and key-pair).
 * Deploy your rails application to the instance as a puma server (automatically detects and installs proper ruby version).
 * Configure application user and upstart script
 * Configure CloudWatch logs agent
-* Configure mechanism to pass environment variables to application via EC2 tags so the same image can be deployed to multiple environments without modification.
+* Configure mechanism to pass environment variables to application via EC2 tags so the same image can be deployed to multiple environments without modification (*optional*).
 * Take a production-ready snapshot of the instance
 * Create a new launch configuration with the newly created AMI
 * Modify existing auto-scaling group to use the newly created launch configuration.
@@ -28,14 +29,14 @@ Deploy a roadrunner application to Vagrant instance(s). Prerequisites:
 ```shell
 > vagrant up
 > vagrant ssh ansible_host
-$ ansible-playbook -i /vagrant/hosts.vagrant /vagrant/roadrunner-empty.yml -e "skip_update=true"
+$ ansible-playbook -i /vagrant/hosts.vagrant /vagrant/hello-world.yml -e "skip_update=true"
 ```
 
 To verify,
 
 1. reboot an instance
 1. SSH into the instance
-1. Verify puma is running on desired port (or visit forwarded port on [localhost](http://localhost:8881))
+1. Verify Rails is running on desired port (or visit forwarded port on [localhost](http://localhost:8881))
 
 ```shell
 $ curl localhost:3000
@@ -59,11 +60,12 @@ Create an AMI image of a roadrunner application. Prerequisites:
    - Auto-scaling group
 
 
-1. Edit the `roadrunnner-empty-aws.yml` file and modify the AWS-related variables.
+1. Configure ssh agent with your AWS keypair
+1. Edit the `vars/aws-config.yml` file and modify the AWS-related variables.
 1. Run ansible
 
 ```shell
-$ ansible-playbook -i localhost, roadrunner-empty-aws.yml --private-key [PATH TO YOUR KEY]
+$ ansible-playbook -i localhost, deploy-to-aws.yml --private-key [PATH TO YOUR KEY]
 ```
 
 ## Customization

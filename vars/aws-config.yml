@@ -1,0 +1,22 @@
+# put AWS configuration details here
+aws_config: {
+  staging: {
+    keypair: "...",
+    region: "us-east-1",
+    base_ami: "ami-d0f506b0",
+    public_subnet: "...",
+    ssh_security_group: "..."
+  }
+}
+
+app_config: {
+  hello_world: {
+    ansible_role_name: "hello-world",
+      staging: {
+        security_groups: [...],
+        auto_scaling_group_name: "...",
+        role_name: "...",
+        instance_type: "t2.medium"
+      }
+  }
+}
